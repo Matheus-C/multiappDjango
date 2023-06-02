@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Divisor de conta</title>
+    </head>
+    <body>
+        <h1>Divisor de conta</h1>
+        <br><br>
+        <form action="{% url 'divide:resultado' %}" method="post">
+            {% csrf_token %}
+            {% for i in quantidade %}
+            <label for="nome{{i}}">Cliente: </label>
+            <input type="text" id="nome{{i}}" name="nome{{i}}">
+            <br><br>
+            <label for="servico{{i}}">Vai pagar a taxa de serviço?</label>
+            <input type="checkbox" id="servico{{i}}" name="servico{{i}}">
+            <br><br>
+            <div id="produtos">
+            <label for="prod0">selecione o produto consumido:</label>
+            <select name="prod0" id="prod0">
+                <option value="pizza">Pizza (R$42,00)</option>
+                <option value="refrigerante">Refrigerante (R$8,00)</option>
+                <option value="suco">Suco (R$ 7,00)</option>
+                <option value="rodizio simples">Rodízio Simples (R$70,00)</option>
+                <option value="rodizio executivo">Rodízio Executivo (R$85,00)</option>
+                <option value="temaki">Temaki (R$20,00)</option>
+                <option value="porcao de peixe">Porção de Peixe (R$50,00)</option>
+            </select>
+            <br>
+            <button onclick="">Adicionar outro produto</button>
+            </div>
+            <hr>
+            <br>
+            {% endfor %}
+            <button type="submit">Enviar</button>
+        </form>
+        <script src="jquery/jquery-3.7.0.min.js">
+            $(document).ready(function(){
+
+            });
+        </script>
+    </body>
+</html>

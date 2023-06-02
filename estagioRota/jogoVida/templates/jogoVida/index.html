@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Jogo da vida</title>
+        <meta lang="UTF-8">
+    </head>
+    <body>
+        <h1>Jogo da vida</h1>
+        <br><br>
+        {% if matriz %}
+        <div style="float: left; display: inline; height: 10px; border: 1px solid black; width: 10px; background-color: green;"></div> <div style="display: inline; margin-left: 5px;"> = célula com vida</div>
+        <br>
+        <div style="float: left; display: inline; height: 10px; border: 1px solid black; width: 10px;"></div> <div style="display: inline; margin-left: 5px;"> = célula sem vida</div>
+        <table style="border: 1px solid black;">
+            {% for i in matriz %}
+                <tr style="border: 1px solid black;">
+                {% for j in i %}
+                {% if j == 1 %}
+                    <td style="background-color: green; border: 1px solid black; width: 30px; height: 30px;"></td>
+                {% else %}
+                    <td style="border: 1px solid black; width: 30px; height: 30px;"></td>
+                {% endif %}
+                {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        <br><br>
+        <button onclick="location.href='{% url 'jogoVida:novo' %}'">Gerar novo</button>
+        <button  onclick="location.href='{% url 'jogoVida:proximo' matriz %}'">Próxima geração</button>
+    </body>
+</html>

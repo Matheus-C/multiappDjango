@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Conversor de números romanos</title>
+    </head>
+    <body>
+        <h1>Conversor de números romanos</h1>
+        <br><br>
+        <form action="{% url 'conversor:resultado' %}" method="get">
+            {% csrf_token %}
+            <label for="romano">Digite o número romano</label>
+            <input type="text" id="romano" name="romano">
+            {% if error_message %}
+            <p style="color: red;"><strong>{{ error_message }}</strong></p>
+            {% endif %}
+            <button type="submit">Enviar</button>
+        </form>
+        <br><br><br>
+        {% if resultado %}
+            <h2>O número é {{ resultado }}</h2>
+        {% endif %}
+    </body>
+</html>

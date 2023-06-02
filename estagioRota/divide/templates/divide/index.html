@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Divisor de conta</title>
+    </head>
+    <body>
+        <h1>Divisor de conta</h1>
+        <br><br>
+        <form action="{% url 'divide:cadastro' %}" method="get">
+            {% csrf_token %}
+            <label for="pessoas">Digite o número de pessoas</label>
+            <input type="number" id="pessoas" name="pessoas">
+            <br><br>
+            <button type="submit">Enviar</button>
+        </form>
+    </body>
+</html>
