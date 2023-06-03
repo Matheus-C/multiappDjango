@@ -2,6 +2,12 @@
 <html>
     <head>
         <title>Divisor de conta</title>
+        <style>
+            select{
+                margin-bottom: 5px;
+                margin-left: 5px;
+            }
+        </style>
     </head>
     <body>
         <h1>Divisor de conta</h1>
@@ -15,28 +21,42 @@
             <label for="servico{{i}}">Vai pagar a taxa de serviço?</label>
             <input type="checkbox" id="servico{{i}}" name="servico{{i}}">
             <br><br>
-            <div id="produtos">
-            <label for="prod0">selecione o produto consumido:</label>
-            <select name="prod0" id="prod0">
-                <option value="pizza">Pizza (R$42,00)</option>
+            <label for="C{{i}}P0">selecione o produto consumido:</label>
+            <div id="C{{i}}">
+            <select name="C{{i}}P0">
+                {% for prod in produtos %}
+                <option value="{{prod.id}}">{{prod}}</option>
+                {% endfor %}
+                <option>aa</option>
+                <!-- <option value="pizza">Pizza (R$42,00)</option>
                 <option value="refrigerante">Refrigerante (R$8,00)</option>
                 <option value="suco">Suco (R$ 7,00)</option>
                 <option value="rodizio simples">Rodízio Simples (R$70,00)</option>
                 <option value="rodizio executivo">Rodízio Executivo (R$85,00)</option>
                 <option value="temaki">Temaki (R$20,00)</option>
-                <option value="porcao de peixe">Porção de Peixe (R$50,00)</option>
+                <option value="porcao de peixe">Porção de Peixe (R$50,00)</option> -->
             </select>
-            <br>
-            <button onclick="">Adicionar outro produto</button>
             </div>
+            <br>
+            <button class="add-prod" type="button" id="{{i}}">Adicionar outro produto</button>
             <hr>
             <br>
             {% endfor %}
+            <input type="hidden" value="{{quantidade}}" name="quantidade" id="quantidade">
             <button type="submit">Enviar</button>
         </form>
-        <script src="jquery/jquery-3.7.0.min.js">
+        {% load static %}
+        <script src="{% static 'jquery/jquery-3.7.0.min.js' %}"></script>
+        <script>
             $(document).ready(function(){
+                $(".add-prod").click(function(){
+                    var id = this.id;
+                    var $select = $(`select[name^='C${id}']:last`).clone(true, true);
+                    var num = parseInt( $select.prop("name").match(/\d+$/g), 10) +1;
+                    var $prod = $select.clone().prop('name', `C${id}P`+num);
+                    $(`div[id^='C${id}']`).append($prod);
 
+                });
             });
         </script>
     </body>

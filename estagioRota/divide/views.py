@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .divisor import divide
 
 # Create your views here.
 def index(request):
@@ -10,6 +11,8 @@ def cadastro(request):
         return render(request, 'divide/form.html', {'quantidade': range(0, int(quantidade))})
     
 def resultado(request):
-    pass
+     if request.method == "POST":
+        resultado = divide(request.POST)
+        return render(request, 'divide/resultado.html', {"resultado": resultado})
         
     
