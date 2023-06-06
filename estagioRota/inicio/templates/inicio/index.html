@@ -2,11 +2,10 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Resultados</title>
+    <title>Página inicial</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body>
-  <!-- menu -->
     <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
         <div class="container-fluid">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,16 +29,10 @@
           </div>
         </div>
       </nav>
-      <!-- fim do menu -->
-      <div class="container mb-3 mt-3">
-        <h1>Divisor de conta</h1>
-        </div>
-    <div class="container-fluid mt-3 col-3">
-    {% for item in resultado %}<!-- para cada cliente passa o nome e o valor que ele deve pagar -->
-    <h4 class="mb-3">{{item}}</h4>
-    {% endfor %}
-    <a class="btn btn-primary" href="{% url 'divide:index' %}">Dividir outra conta</a>
-    </div>
+      <div class="container-fluid mt-3">
+        <h1>Olá, escolha uma das opções do menu acima</h1>
+      </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 </html>

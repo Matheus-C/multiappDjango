@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Divisor de conta</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <style>
             select{
                 margin-bottom: 5px;
@@ -10,45 +11,66 @@
         </style>
     </head>
     <body>
+      <!-- menu -->
+        <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+            <div class="container-fluid">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'inicio:index' %}">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'conversor:index' %}">Conversor de números romanos</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'jogoVida:index' %}">Jogo da vida</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'divide:index' %}">Divisor de conta de restaurante</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <!-- fim do menu -->
+        <div class="container mb-3 mt-3">
         <h1>Divisor de conta</h1>
-        <br><br>
+        </div>
+        <div class="container col-6">
         <form action="{% url 'divide:resultado' %}" method="post">
             {% csrf_token %}
-            {% for i in quantidade %}
-            <label for="nome{{i}}">Cliente: </label>
-            <input type="text" id="nome{{i}}" name="nome{{i}}">
-            <br><br>
-            <label for="servico{{i}}">Vai pagar a taxa de serviço?</label>
-            <input type="checkbox" id="servico{{i}}" name="servico{{i}}">
-            <br><br>
-            <label for="C{{i}}P0">selecione o produto consumido:</label>
+            {% for i in quantidade %}<!-- irá construir uma quantidade de campos conforme foi pedido no formulário anterior -->
+            <label class="form-label" for="nome{{i}}">Cliente: </label>
+            <input class="form-control mb-3" type="text" id="nome{{i}}" name="nome{{i}}">
+            <input class="form-check-input" type="checkbox" id="servico{{i}}" name="servico{{i}}">
+            <label class="form-check-label mb-3" for="servico{{i}}">Irá pagar a taxa de serviço?</label>
+            <br>
+            <label class="form-label" for="C{{i}}P0">selecione o produto consumido:</label>
             <div id="C{{i}}">
-            <select name="C{{i}}P0">
-                {% for prod in produtos %}
+            <select class="form-select" name="C{{i}}P0">
+                <option value="-1" selected>Nada</option>
+                {% for prod in produtos %}<!-- constrói dinamicamente as opções do select de acordo com os produtos especificados no banco de dados -->
                 <option value="{{prod.id}}">{{prod}}</option>
                 {% endfor %}
-                <option>aa</option>
-                <!-- <option value="pizza">Pizza (R$42,00)</option>
-                <option value="refrigerante">Refrigerante (R$8,00)</option>
-                <option value="suco">Suco (R$ 7,00)</option>
-                <option value="rodizio simples">Rodízio Simples (R$70,00)</option>
-                <option value="rodizio executivo">Rodízio Executivo (R$85,00)</option>
-                <option value="temaki">Temaki (R$20,00)</option>
-                <option value="porcao de peixe">Porção de Peixe (R$50,00)</option> -->
             </select>
             </div>
             <br>
-            <button class="add-prod" type="button" id="{{i}}">Adicionar outro produto</button>
-            <hr>
+            <button class="add-prod btn btn-primary" type="button" id="{{i}}">Adicionar outro produto</button><!-- adiciona outro select para preencher -->
+            <hr class="border border-dark border-3 opacity-75">
             <br>
             {% endfor %}
-            <input type="hidden" value="{{quantidade}}" name="quantidade" id="quantidade">
-            <button type="submit">Enviar</button>
+            <input type="hidden" value="{{quant}}" name="quant" id="quant"><!-- campo escondido apenas para passar o numero de clientes já que a quantidade é um range() e não um int -->
+            <button class="btn btn-primary mb-5 col-3" type="submit">Enviar</button>
         </form>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
         {% load static %}
         <script src="{% static 'jquery/jquery-3.7.0.min.js' %}"></script>
         <script>
-            $(document).ready(function(){
+            $(document).ready(function(){//função jQuery para adicionar novos campos de produtos
                 $(".add-prod").click(function(){
                     var id = this.id;
                     var $select = $(`select[name^='C${id}']:last`).clone(true, true);

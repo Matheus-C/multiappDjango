@@ -2,16 +2,45 @@
 <html>
     <head>
         <title>Divisor de conta</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     </head>
     <body>
-        <h1>Divisor de conta</h1>
-        <br><br>
+      <!-- menu -->
+        <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+            <div class="container-fluid">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'inicio:index' %}">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'conversor:index' %}">Conversor de números romanos</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'jogoVida:index' %}">Jogo da vida</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'divide:index' %}">Divisor de conta de restaurante</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <!-- fim do menu -->
+        <div class="container-fluid mt-3 mb-3">
+          <h1>Divisor de conta</h1>
+        </div>
         <form action="{% url 'divide:cadastro' %}" method="get">
             {% csrf_token %}
-            <label for="pessoas">Digite o número de pessoas</label>
-            <input type="number" id="pessoas" name="pessoas">
-            <br><br>
-            <button type="submit">Enviar</button>
+            <div class="container col-3">
+              <label class="form-label" for="pessoas">Digite o número de pessoas</label>
+              <input class="form-control mb-3" type="number" id="pessoas" name="pessoas">
+              <button class="btn btn-primary" type="submit">Enviar</button>
+            </div>
         </form>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </body>
 </html>

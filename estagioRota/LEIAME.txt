@@ -1,0 +1,3 @@
+Projeto executado em python com o framework django
+
+para executá-lo é necessário ter o python e o django instalados e rodar o seguinte comando na pasta: python manage.py runserver

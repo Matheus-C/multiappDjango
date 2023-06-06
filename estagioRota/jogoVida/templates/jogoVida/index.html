@@ -3,15 +3,46 @@
     <head>
         <title>Jogo da vida</title>
         <meta lang="UTF-8">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     </head>
     <body>
-        <h1>Jogo da vida</h1>
-        <br><br>
+      <!-- menu -->
+        <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+            <div class="container-fluid">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'inicio:index' %}">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'conversor:index' %}">Conversor de números romanos</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'jogoVida:index' %}">Jogo da vida</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'divide:index' %}">Divisor de conta de restaurante</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <!-- fim do menu -->
+        <div class="container mb-3 mt-3">
+          <h1>Jogo da vida</h1>
+        </div>
+        <!-- se existir um tabuleiro criado será construído a legenda e o tabuleiro -->
         {% if matriz %}
-        <div style="float: left; display: inline; height: 10px; border: 1px solid black; width: 10px; background-color: green;"></div> <div style="display: inline; margin-left: 5px;"> = célula com vida</div>
+        <div class="container col-2 mb-3">
+        <div style="float: left; display: inline; height: 20px; border: 1px solid black; width: 20px; background-color: green;"></div> <div style="display: inline; margin-left: 5px;"> = célula com vida</div>
         <br>
-        <div style="float: left; display: inline; height: 10px; border: 1px solid black; width: 10px;"></div> <div style="display: inline; margin-left: 5px;"> = célula sem vida</div>
-        <table style="border: 1px solid black;">
+        <div style="float: left; display: inline; height: 20px; border: 1px solid black; width: 20px;"></div> <div style="display: inline; margin-left: 5px;"> = célula sem vida</div>
+        </div>
+        <div class="container col-2 mb-3">
+        <table class="table table-bordered table-sm">
             {% for i in matriz %}
                 <tr style="border: 1px solid black;">
                 {% for j in i %}
@@ -24,9 +55,19 @@
                 </tr>
             {% endfor %}
         </table>
+        </div>
         {% endif %}
-        <br><br>
-        <button onclick="location.href='{% url 'jogoVida:novo' %}'">Gerar novo</button>
-        <button  onclick="location.href='{% url 'jogoVida:proximo' matriz %}'">Próxima geração</button>
+        <!-- botões para gerar um novo tabuleiro ou para avançar uma geração no atual -->
+      <div class="container col-2">
+        <div class="row">
+          <div class="col col-6">
+          <button class="btn btn-primary" onclick="location.href='{% url 'jogoVida:novo' %}'">Gerar novo</button>
+          </div>
+          <div class="col col-6">
+          <button class="btn btn-primary" onclick="location.href='{% url 'jogoVida:proximo' matriz %}'">Próxima geração</button>
+          </div>
+        </div>
+      </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </body>
 </html>

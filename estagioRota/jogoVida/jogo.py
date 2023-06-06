@@ -9,7 +9,7 @@ def novoJogo():
             tabuleiro[i].append(random.randint(0, 1))
     return tabuleiro
 
-def quantosVizinhos(x, y, tab):
+def quantosVizinhos(x, y, tab):# Função que retorna o número de vizinhos que contém vida
     vizinhos = 0
     for i in range(x-1, x+2, 2):
         if 0 <= i < len(tab):
@@ -27,7 +27,7 @@ def quantosVizinhos(x, y, tab):
                         vizinhos = vizinhos + 1
     return vizinhos
 
-def rodada(tab):
+def rodada(tab):# função que avança uma rodada(geração) no tabuleiro
     tabuleiro = ast.literal_eval(tab)
     aux = []
     for i in range(4):
